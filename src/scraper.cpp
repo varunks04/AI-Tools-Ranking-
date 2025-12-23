@@ -657,7 +657,7 @@ public:
 <html lang="en" class="dark">
 <head>
     <meta charset="UTF-8">
-    <title>Enterprise AI Intelligence</title>
+    <title>CrossBench - AI Model Leaderboard Aggregator</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -665,14 +665,16 @@ public:
         body { background: #020617; color: #f8fafc; font-family: 'Outfit', sans-serif; }
         .glass { background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.05); }
         .glass-header { background: rgba(2, 6, 23, 0.9); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .tab-btn { padding: 0.5rem 1.0rem; border-radius: 8px; font-size: 0.8rem; font-weight: 600; transition: all 0.2s; border: 1px solid transparent; }
-        .tab-active { background: #3b82f6; color: white; border-color: #60a5fa; box-shadow: 0 0 15px rgba(59, 130, 246, 0.4); }
+        .tab-btn { padding: 0.525rem 1.05rem; border-radius: 8px; font-size: 0.84rem; font-weight: 700; transition: all 0.2s; border: 1px solid transparent; }
+        .tab-active { background: #3b82f6; color: white; border-color: #60a5fa; box-shadow: 0 0 15px rgba(59, 130, 246, 0.4); font-weight: 800; }
         .tab-inactive { color: #94a3b8; background: rgba(30, 41, 59, 0.4); }
         .tab-inactive:hover { background: rgba(51, 65, 85, 0.8); color: #cbd5e1; }
         .conf-bar-bg { background: rgba(51, 65, 85, 0.3); border-radius: 99px; height: 8px; width: 100%; overflow: hidden; }
         .conf-bar-fill { height: 100%; border-radius: 99px; }
-        .tooltip { visibility: hidden; opacity: 0; transition: opacity 0.2s; }
+        .tooltip { visibility: hidden; opacity: 0; transition: opacity 0.2s; position: absolute; z-index: 100; }
         .group:hover .tooltip { visibility: visible; opacity: 1; }
+        #sortSelect option { background: #1e293b; color: #f8fafc; padding: 0.5rem; }
+        #sortSelect option:hover { background: #334155; }
     </style>
 </head>
 <body class="min-h-screen flex flex-col">
@@ -680,12 +682,15 @@ public:
     <header class="glass-header sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-6 py-5 flex flex-col gap-5">
             <!-- Row 1: Identity -->
-            <div class="flex items-center gap-4">
-                <div class="h-12 w-12 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-xl flex items-center justify-center text-white font-extrabold text-2xl shadow-lg shadow-blue-500/30">A</div>
-                <div>
-                    <h1 class="text-3xl font-extrabold tracking-tight text-white drop-shadow-md">SYSTEM ARCHITECT</h1>
-                    <div class="text-[11px] uppercase tracking-[0.2em] text-blue-400 font-bold">Intelligence Engine v8.5</div>
+            <div class="flex flex-col gap-2">
+                <div class="flex items-center gap-4">
+                    <div class="h-12 w-12 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-xl flex items-center justify-center text-white font-extrabold text-2xl shadow-lg shadow-blue-500/30">CB</div>
+                    <div>
+                        <h1 class="font-extrabold tracking-tight text-white drop-shadow-md" style="font-size: 1.969rem;">CrossBench</h1>
+                        <div class="uppercase tracking-[0.2em] text-blue-400 font-bold" style="font-size: 12.1px;">AI Model Leaderboard Aggregator</div>
+                    </div>
                 </div>
+                <p class="text-slate-400 leading-relaxed" style="font-size: 0.9625rem;">A Bias-Adjusted Aggregation of Multiple AI Leaderboards<br/>to Help You Compare Models Faster and Make Informed Decisions</p>
             </div>
             
             <!-- Row 2: Navigation (Wrapped, No Scroll) -->
@@ -717,12 +722,30 @@ public:
             <table class="w-full text-left border-collapse">
                 <thead>
                     <tr class="border-b border-white/5 bg-white/[0.02]">
-                        <th class="p-4 text-xs font-bold text-slate-500 tracking-wider w-16 text-center">RANK</th>
-                        <th class="p-4 text-xs font-bold text-slate-500 tracking-wider">MODEL SPECIFICATION</th>
-                        <th class="p-4 text-xs font-bold text-slate-500 tracking-wider text-center" id="header-modality">TYPE</th>
-                        <th class="p-4 text-xs font-bold text-slate-500 tracking-wider text-right">SCORE</th>
-                        <th class="p-4 text-xs font-bold text-slate-500 tracking-wider text-right">METRICS</th>
-                        <th class="p-4 text-xs font-bold text-slate-500 tracking-wider w-40">RELIABILITY</th>
+                        <th id="th-rank" class="p-4 text-xs font-bold text-slate-500 tracking-wider w-16 text-center cursor-help group relative">
+                            RANK
+                            <div class="tooltip absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-max max-w-xs px-3 py-2 bg-slate-900 border border-slate-700 rounded-lg shadow-xl text-xs z-50 text-slate-300 font-normal normal-case">Current position in this leaderboard view</div>
+                        </th>
+                        <th id="th-model" class="p-4 text-xs font-bold text-slate-500 tracking-wider cursor-help group relative">
+                            MODEL
+                            <div class="tooltip absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-max max-w-xs px-3 py-2 bg-slate-900 border border-slate-700 rounded-lg shadow-xl text-xs z-50 text-slate-300 font-normal normal-case">Model name and organization</div>
+                        </th>
+                        <th id="th-type" class="p-4 text-xs font-bold text-slate-500 tracking-wider text-center cursor-help group relative" id="header-modality">
+                            TYPE
+                            <div class="tooltip absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-max max-w-xs px-3 py-2 bg-slate-900 border border-slate-700 rounded-lg shadow-xl text-xs z-50 text-slate-300 font-normal normal-case">Primary modality: Text (LLM), Image (generator), or Multimodal</div>
+                        </th>
+                        <th id="th-score" class="p-4 text-xs font-bold text-slate-500 tracking-wider text-right cursor-help group relative">
+                            SCORE
+                            <div id="tp-score" class="tooltip absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-max max-w-xs px-3 py-2 bg-slate-900 border border-slate-700 rounded-lg shadow-xl text-xs z-50 text-slate-300 font-normal normal-case">Performance score for this view</div>
+                        </th>
+                        <th id="th-metrics" class="p-4 text-xs font-bold text-slate-500 tracking-wider text-right cursor-help group relative">
+                            METRICS
+                            <div id="tp-metrics" class="tooltip absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-max max-w-xs px-3 py-2 bg-slate-900 border border-slate-700 rounded-lg shadow-xl text-xs z-50 text-slate-300 font-normal normal-case">Key performance metric</div>
+                        </th>
+                        <th id="th-reliability" class="p-4 text-xs font-bold text-slate-500 tracking-wider w-40 cursor-help group relative">
+                            RELIABILITY
+                            <div class="tooltip absolute bottom-full right-0 mb-2 w-max max-w-xs px-3 py-2 bg-slate-900 border border-slate-700 rounded-lg shadow-xl text-xs z-50 text-slate-300 font-normal normal-case">Data confidence level: Based on verification across multiple benchmarks and sources</div>
+                        </th>
                     </tr>
                 </thead>
                 <tbody id="tableBody" class="divide-y divide-white/5 text-sm"></tbody>
@@ -732,25 +755,25 @@ public:
         <!-- Ecosystem View -->
         <div id="ecosystemContainer" class="hidden">
             <div class="glass rounded-xl p-8 mb-6">
-                <h2 class="text-2xl font-bold mb-4 text-center">AI Ecosystem Market Share & Performance</h2>
-                <p class="text-gray-400 text-center mb-6">Comprehensive view of AI organizations by model count, average performance, and market presence</p>
+                <h2 class="text-2xl font-bold mb-4 text-center text-white">AI Ecosystem Market Share & Performance</h2>
+                <p class="text-slate-400 text-center mb-6">Comprehensive view of AI organizations by model count, average performance, and market presence</p>
             </div>
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-                <div class="glass rounded-xl p-6">
-                    <h3 class="text-xl font-semibold mb-4 text-center">Market Share by Model Count</h3>
-                    <div style="position: relative; height: 400px;">
+                <div class="glass rounded-xl p-5">
+                    <h3 class="text-lg font-semibold mb-3 text-center text-white">Market Share by Model Count</h3>
+                    <div style="position: relative; height: 480px;">
                         <canvas id="ecosystemChart"></canvas>
                     </div>
                 </div>
-                <div class="glass rounded-xl p-6">
-                    <h3 class="text-xl font-semibold mb-4 text-center">Average Performance by Organization</h3>
-                    <div style="position: relative; height: 400px;">
+                <div class="glass rounded-xl p-5">
+                    <h3 class="text-lg font-semibold mb-3 text-center text-white">Average Performance by Organization</h3>
+                    <div style="position: relative; height: 480px;">
                         <canvas id="performanceChart"></canvas>
                     </div>
                 </div>
             </div>
-            <div class="glass rounded-xl p-6">
-                <h3 class="text-xl font-semibold mb-4">Organization Statistics</h3>
+            <div class="glass rounded-xl p-5">
+                <h3 class="text-lg font-semibold mb-3 text-white">Organization Statistics</h3>
                 <div id="orgStatsTable" class="overflow-x-auto">
                     <table class="w-full text-sm">
                         <thead class="border-b border-white/10">
@@ -771,20 +794,37 @@ public:
         const rawData = )HTML" << jsonData << R"HTML(;
         let models = rawData.models;
         const ecosystem = rawData.ecosystem;
+        
+        // Config: Set global chart defaults for dark mode visibility
+        Chart.defaults.color = '#ffffff';
+        Chart.defaults.borderColor = 'rgba(255,255,255,0.1)';
+
         const views = {
-            'overall':    { title: 'Overall',    desc: 'Bias-adjusted performance synthesis', rankKey: 'overall', label: 'Index Score' },
-            'value':      { title: 'Best Value', desc: 'Performance per USD unit', rankKey: 'value', label: 'Value Ratio' },
-            'coding':     { title: 'Coding',     desc: 'Software development capabilities', rankKey: 'coding', label: 'Code Score' },
-            'image':      { title: 'Image Gen',  desc: 'Visual generation quality', rankKey: 'image', label: 'Creative Score' },
-            'video':      { title: 'Video Gen',  desc: 'Temporal visual synthesis', rankKey: 'video', label: 'Motion Score' },
-            'speed':      { title: 'Speed',      desc: 'Token generation throughput', rankKey: 'speed', label: 'Tokens/Sec' },
-            'conf':       { title: 'Confidence', desc: 'Data verification level', rankKey: 'confidence', label: 'Reliability' },
-            'enterprise': { title: 'Enterprise', desc: 'SLA & organizational maturity', rankKey: 'enterprise', label: 'Readiness' },
-            'opensource': { title: 'Open Source',desc: 'Publicly available weights', rankKey: 'overall', label: 'Index Score' },
-            'ecosystem':  { title: 'Ecosystem',  desc: 'Market share analysis', rankKey: 'overall', label: 'Share' }
+            'overall':    { title: 'Overall',    desc: 'Bias-adjusted performance synthesis', rankKey: 'overall', label: 'Index Score', tooltip_score: 'Composite score: Weighted average of reasoning, coding, creative, confidence, and price metrics (0-100 scale)', tooltip_metric: 'Cost: Price per 1M input tokens' },
+            'value':      { title: 'Best Value', desc: 'Performance per USD unit', rankKey: 'value', label: 'Value Ratio', tooltip_score: 'Value Score: Performance points divided by price - higher is better bang for buck', tooltip_metric: 'Cost: Input price per 1M tokens' },
+            'coding':     { title: 'Coding',     desc: 'Software development capabilities', rankKey: 'coding', label: 'Code Score', tooltip_score: 'Coding Score: Specialized programming benchmark weighted with reasoning & context window (0-100)', tooltip_metric: 'Coding Capability: Benchmark performance' },
+            'image':      { title: 'Image Gen',  desc: 'Visual generation quality', rankKey: 'image', label: 'Creative Score', tooltip_score: 'Image Score: Visual quality, prompt adherence, and artistic coherence (0-100)', tooltip_metric: 'Creative Rating: Generation quality score' },
+            'video':      { title: 'Video Gen',  desc: 'Temporal visual synthesis', rankKey: 'video', label: 'Motion Score', tooltip_score: 'Video Score: Temporal consistency, motion physics, and visual fidelity (0-100)', tooltip_metric: 'Creative Rating: Video generation quality' },
+            'speed':      { title: 'Speed',      desc: 'Token generation throughput', rankKey: 'speed', label: 'Tokens/Sec', tooltip_score: 'Speed Score: Normalized throughput performance (0-100 scale)', tooltip_metric: 'Throughput: Raw tokens generated per second' },
+            'conf':       { title: 'Confidence', desc: 'Data verification level', rankKey: 'confidence', label: 'Reliability', tooltip_score: 'Confidence Level: Data verification percentage based on multi-benchmark validation (0-100%)', tooltip_metric: 'Cost: Price per 1M tokens' },
+            'enterprise': { title: 'Enterprise', desc: 'SLA & organizational maturity', rankKey: 'enterprise', label: 'Readiness', tooltip_score: 'Enterprise Score: SLA guarantees, organizational maturity, and reliability (0-100)', tooltip_metric: 'Cost: Price per 1M tokens' },
+            'opensource': { title: 'Open Source',desc: 'Publicly available weights', rankKey: 'overall', label: 'Index Score', tooltip_score: 'Overall Score: Composite performance for open-source models only (0-100)', tooltip_metric: 'Cost: Price (usually free or hosting cost)' },
+            'ecosystem':  { title: 'Ecosystem',  desc: 'Market share analysis', rankKey: 'overall', label: 'Share', tooltip_score: '', tooltip_metric: '' }
         };
         let currentView = 'overall';
         
+        function updateHeaderTooltips(key) {
+             const def = views[key];
+             if(!def) return;
+             
+             // Update tooltip content
+             const tpScore = document.getElementById('tp-score');
+             if(tpScore) tpScore.innerText = def.tooltip_score;
+             
+             const tpMetrics = document.getElementById('tp-metrics');
+             if(tpMetrics) tpMetrics.innerText = def.tooltip_metric;
+        }
+
         function init() {
             const tabContainer = document.getElementById('viewTabs');
             Object.keys(views).forEach(key => {
@@ -827,10 +867,11 @@ public:
                         legend: { 
                             position: 'right',
                             labels: { 
-                                color: '#cbd5e1', 
-                                font: { family: 'Outfit', size: 12, weight: '600' }, 
+                                color: '#ffffff',
+                                font: { family: 'Outfit', size: 13, weight: '700' }, 
                                 usePointStyle: true, 
                                 padding: 15,
+                                boxPadding: 8,
                                 generateLabels: function(chart) {
                                     const data = chart.data;
                                     if (data.labels.length && data.datasets.length) {
@@ -841,6 +882,8 @@ public:
                                             return {
                                                 text: `${label}: ${percentage}%`,
                                                 fillStyle: data.datasets[0].backgroundColor[i],
+                                                strokeStyle: '#ffffff',
+                                                lineWidth: 1,
                                                 hidden: false,
                                                 index: i
                                             };
@@ -959,7 +1002,10 @@ public:
             document.getElementById('ecosystemContainer').classList.toggle('hidden', !isEco);
             document.getElementById('controlsBar').classList.toggle('hidden', isEco);
             
-            if(!isEco) renderCurrentView();
+            if(!isEco) {
+                renderCurrentView();
+                updateHeaderTooltips(viewKey);
+            }
         }
 
         function renderCurrentView(isSortOverride = false) {
@@ -968,7 +1014,9 @@ public:
 
             // Control Type column visibility: show only in Overall, Value, Enterprise, Open Source, Confidence
             const showTypeColumn = ['overall', 'value', 'enterprise', 'opensource', 'conf'].includes(currentView);
-            document.getElementById('header-modality').style.display = showTypeColumn ? 'table-cell' : 'none';
+            // header-modality is now th-type
+            const thType = document.getElementById('th-type');
+            if (thType) thType.style.display = showTypeColumn ? 'table-cell' : 'none';
 
             let filtered = models.filter(m => {
                 // Overall tab: Focus on text/LLM models (exclude pure image/video generation models)
@@ -1240,9 +1288,10 @@ public:
 };
 
 int main() {
-    std::cout << Utils::BOLD << "\n=== AI Model Ranking System v8.5 (Production) ===" << Utils::RESET << std::endl;
+    std::cout << Utils::BOLD << "\n=== CrossBench - AI Model Leaderboard Aggregator ===" << Utils::RESET << std::endl;
+    std::cout << Utils::CYAN << "A Bias-Adjusted Aggregation of Multiple AI Leaderboards" << Utils::RESET << std::endl;
     std::cout << Utils::CYAN << "Live Data Source: api.zeroeval.com" << Utils::RESET << std::endl;
-    std::cout << Utils::CYAN << "No Simulated Data | All Metrics Computed Dynamically\n" << Utils::RESET << std::endl;
+    std::cout << Utils::CYAN << "All Metrics Computed Dynamically\n" << Utils::RESET << std::endl;
     
     IntelligenceEngine engine;
     engine.Run();

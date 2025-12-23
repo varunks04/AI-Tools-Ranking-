@@ -1,200 +1,318 @@
-# Quick Reference Guide - Enhanced Features
+# CrossBench Usage Guide
 
-## 🎯 User Input Feature
+## 🚀 Quick Start
 
-When you run the scraper and select option 1 (Fetch Model Leaderboard), you'll be prompted:
+### Running CrossBench
+```bash
+# Navigate to project directory
+cd "Task 6 Create a program for interactive web scrapping"
 
+# Run the executable
+./bin/scraper.exe
+
+# Or compile and run
+g++ -o bin/scraper.exe src/scraper.cpp -lwinhttp -std=c++17 -O2
+./bin/scraper.exe
 ```
-How many top models to display? (Enter number, default 20):
-```
 
-**Examples:**
-- Enter `10` to see top 10 models in each ranking
-- Enter `50` to see top 50 models
-- Press Enter (leave blank) for default 20 models
-- Enter any number up to the total available models
+The program automatically:
+1. Fetches latest data from api.zeroeval.com
+2. Applies bias-adjusted scoring algorithms
+3. Generates rankings across 10 specialized views
+4. Exports to HTML, CSV, JSON, and text formats
+5. Opens the interactive dashboard
 
 ---
 
-## 📊 Three Ranking Tables
+## 🎨 Interactive Dashboard
 
-### 1️⃣ Performance Ranking (GPQA High → Low)
-Shows the best performing models based on GPQA benchmark scores.
-
-**Example Output:**
+### Accessing the Dashboard
+After running the program, open:
 ```
-==================================================================================
-  RANKING #1: TOP MODELS BY PERFORMANCE (GPQA Score - High to Low)
-==================================================================================
-
-Rank  Model                        Organization  GPQA
-----------------------------------------------------------------------------------
-1     GPT-5.2 Pro                  OpenAI        0.932
-2     GPT-5.2                      OpenAI        0.924
-3     Gemini 3 Pro                 Google        0.919
-...
+output/leaderboard.html
 ```
+in any modern web browser (Chrome, Firefox, Edge, Safari).
 
-### 2️⃣ Price Ranking (Low → High)
-Shows models sorted by price from cheapest to most expensive.
+### Dashboard Features
 
-**Example Output:**
+#### 📑 Tab Navigation
+The dashboard provides 10 specialized leaderboard views:
+
+1. **Overall** - Comprehensive bias-adjusted ranking
+   - Weighted composite of all metrics
+   - Fair comparison across different model types
+   
+2. **Best Value** - Performance per dollar
+   - Identifies cost-effective models
+   - Ideal for budget-conscious selection
+   
+3. **Coding** - Software development capability
+   - Programming benchmarks
+   - Code generation quality
+   
+4. **Image Gen** - Visual generation quality
+   - Image coherence and aesthetics
+   - Prompt adherence
+   
+5. **Video Gen** - Temporal visual synthesis
+   - Motion consistency
+   - Physics simulation
+   
+6. **Speed** - Token generation throughput
+   - Tokens per second
+   - Latency performance
+   
+7. **Confidence** - Data reliability
+   - Multi-benchmark validation
+   - Signal strength
+   
+8. **Enterprise** - Business readiness
+   - SLA guarantees
+   - Organizational maturity
+   
+9. **Open Source** - Publicly available models
+   - Community-driven models
+   - Self-hostable options
+   
+10. **Ecosystem** - Market analytics
+    - Organization market share
+    - Performance by provider
+
+#### 🖱️ Interactive Features
+
+**Column Header Tooltips:**
+Hover over any column header to see:
+- What the metric measures
+- How it's calculated
+- What values mean
+- Context specific to current tab
+
+**Example Tooltips:**
+- **Overall Tab + SCORE column**: "Composite score: Weighted average of reasoning, coding, creative, confidence, and price metrics (0-100 scale)"
+- **Coding Tab + METRICS column**: "Coding Capability: Benchmark performance"
+- **Speed Tab + SCORE column**: "Speed Score: Normalized throughput performance (0-100 scale)"
+
+**Sort Controls:**
+- Default: Authoritative ranking (with recency tie-breaker)
+- Price: Low to High
+- Speed: High to Low  
+- Confidence: High to Low
+### Overall Score Formula
 ```
-==================================================================================
-  RANKING #2: TOP MODELS BY PRICE (Low to High)
-==================================================================================
-
-Rank  Model                        Organization  GPQA      Price
-----------------------------------------------------------------------------------
-1     Free Model 1                 Provider A    0.750     Free
-2     Budget Model 2               Provider B    0.780     $0.50
-3     Affordable Model 3           Provider C    0.800     $1.00
-...
+Overall = (Core Score × 0.40) 
+        + (Coding Score × 0.20)
+        + (Creative Score × 0.15)
+        + (Confidence × 0.15)
+        + (Price Factor × 0.10)
 ```
+All normalized to 0-100 scale.
 
-### 3️⃣ Best Value Ranking (Performance-to-Price Ratio)
-Shows models with the best balance of performance and cost.
-
-**Formula:** Value Score = GPQA Score / (Price + 0.01)
-
-**Example Output:**
+### Value Score Formula
 ```
-==================================================================================
-  RANKING #3: BEST VALUE MODELS (Performance-to-Price Ratio)
-==================================================================================
-
-Rank  Model                        Organization  GPQA      Price
-----------------------------------------------------------------------------------
-1     Great Value Model            Provider X    0.850     $2.00
-2     Budget Performer             Provider Y    0.800     $1.50
-3     Efficient Model              Provider Z    0.820     $2.50
-...
+Value = (Performance Score)² / (1 + Price/10)
 ```
+Higher is better. Rewards excellent performance while considering cost.
 
----
-
-## 📈 Statistics Summary
-
-After displaying all rankings, you'll see a summary:
-
-```
-==================================================================================
-  STATISTICS SUMMARY
-==================================================================================
-Total Models Analyzed: 250
-Top Performer: GPT-5.2 Pro (GPQA: 0.932)
-Best Price: Free Model 1 (Free)
-Best Value: Great Value Model (Performance/Price)
-==================================================================================
-```
+### Recency Tie-Breaker
+When two models have scores within 0.5 points:
+- Newer model (fewer days since release) ranks higher
+- Ensures fairness and recognizes recent improvements
 
 ---
 
 ## 📁 Export Files Generated
 
-### Text Format
-**File:** `output.txt`
-- Contains all 3 rankings in formatted tables
-- Human-readable
-- Easy to share via email or documents
+### HTML Dashboard
+**File:** `output/leaderboard.html`
+- Interactive web interface
+- 10 specialized tabs
+- Hover tooltips
+- Sort controls
+- Ecosystem charts
+- **Recommended for exploration**
 
-### CSV Formats (Spreadsheet Compatible)
-**File:** `leaderboard_performance.csv`
+### CSV Files (Spreadsheet Compatible)
+**File:** `data/leaderboard_performance.csv`
 ```csv
-Rank,Model,Organization,GPQA Score,Input Price
-1,"GPT-5.2 Pro","OpenAI",0.932,"$10.00"
-2,"GPT-5.2","OpenAI",0.924,"$8.00"
+Rank,Model,Organization,Score,Coding,Creative,Price,Confidence
+1,GPT-5.2 Pro,OpenAI,90.5,88.1,96.9,10.00,92.5
 ```
 
-**File:** `leaderboard_price.csv`
+**File:** `data/leaderboard_value.csv`
 ```csv
-Rank,Model,Organization,GPQA Score,Input Price,Price Value
-1,"Free Model","Provider",0.750,"Free",0.0000
-2,"Budget Model","Provider",0.780,"$0.50",0.5000
+Rank,Model,Organization,Value Score,Performance,Price
+1,Great Value Model,Provider X,425.0,85.0,2.00
 ```
 
-**File:** `leaderboard_value.csv`
+**File:** `data/leaderboard_price.csv`
 ```csv
-Rank,Model,Organization,GPQA Score,Input Price,Value Score
-1,"Value Model","Provider",0.850,"$2.00",425.00
-2,"Efficient Model","Provider",0.820,"$2.50",328.00
+Rank,Model,Organization,Price,Performance Score
+1,Free Model,Provider,Free,75.0
+2,Budget Model,Provider,0.50,78.0
 ```
 
 ### JSON Format (Machine Readable)
-**File:** `leaderboard_all.json`
+**File:** `data/leaderboard_all.json`
 ```json
 {
-  "metadata": {
-    "generated": "Dec 23 2025 18:00:00",
-    "total_models": 250
+  "ecosystem": {
+    "OpenAI": 12.51,
+    "Google": 10.35,
+    "Anthropic": 6.77
   },
-  "performance_ranking": [
-    {"rank":1,"model":"GPT-5.2 Pro","organization":"OpenAI","gpqa_score":0.932,"input_price":"$10.00"},
-    ...
-  ],
-  "price_ranking": [
-    {"rank":1,"model":"Free Model","organization":"Provider","gpqa_score":0.750,"input_price":"Free","price_value":0.0},
-    ...
-  ],
-  "value_ranking": [
-    {"rank":1,"model":"Value Model","organization":"Provider","gpqa_score":0.850,"input_price":"$2.00","value_score":425.00},
-    ...
+  "models": [
+    {
+      "name": "GPT-5.2",
+      "org": "OpenAI",
+      "metrics": {
+        "score": 92.4,
+        "coding": 78.5,
+        "creative": 100.0,
+        "price": 8.0,
+        "speed": 100.0
+      },
+      "ranks": {
+        "overall": 90.1,
+        "value": 1.46,
+        "coding": 74.9,
+        "speed": 62.0
+      },
+      "meta": {
+        "confidence": 92.5,
+        "is_enterprise": true,
+        "is_open_source": false
+      }
+    }
   ]
 }
 ```
 
+### Text Format (Legacy)
+**File:** `data/leaderboard_all.txt`
+```
+AI LEADERBOARD V8.5 (Fixed)
+------------------
+Rank 1: GPT-5.2 - OpenAI (92.40)
+Rank 2: Gemini 3 Pro - Google (91.90)
+...
+```
+
 ---
 
-## 🎮 Usage Workflow
+## 🎮 Typical Workflow
 
-1. **Start the program**
+1. **Run the executable**
    ```bash
-   ./scraper.exe
+   ./bin/scraper.exe
    ```
 
-2. **Select Option 1** from menu
+2. **Wait for processing** (typically 5-10 seconds)
    ```
-   Select option [1-4]: 1
-   ```
-
-3. **Enter display count**
-   ```
-   How many top models to display? (Enter number, default 20): 30
+   [Network] Connecting to api.zeroeval.com...
+   [Processing] Found 250 models
+   [Export] Generating files...
+   ✓ Pipeline Complete
    ```
 
-4. **View results** - You'll see:
-   - Progress indicators during download
-   - 3 different ranking tables (top 30 in each)
-   - Statistics summary
-   - Export confirmation messages
+3. **Open the dashboard**
+   - Locate `output/leaderboard.html`
+   - Double-click or open in browser
+   - Explore different tabs
+   - Hover over headers for explanations
 
-5. **Check exported files** - All data saved in:
-   - `output.txt` - All rankings
-   - `leaderboard_performance.csv` - Performance ranking
-   - `leaderboard_price.csv` - Price ranking
-   - `leaderboard_value.csv` - Value ranking
-   - `leaderboard_all.json` - Comprehensive JSON
+4. **Export for analysis**
+   - Use CSV files for Excel/Google Sheets
+   - Use JSON for programmatic access
+   - Share text file for quick reference
 
 ---
 
-## 💡 Tips
+## 💡 Pro Tips
 
-- **Large Datasets:** Enter a high number (e.g., 100) to see more models
-- **Quick Overview:** Use default 20 for a quick overview
-- **Spreadsheet Analysis:** Open CSV files in Excel/Google Sheets for filtering and sorting
-- **Programming:** Use the JSON file for programmatic analysis
-- **Sharing:** Use output.txt for easy sharing of all rankings
+### For Quick Decisions
+- **Overall Tab**: Best general-purpose models
+- **Value Tab**: Cost-effective choices
+- **Confidence Filter**: Sort by confidence for reliable data
+
+### For Specific Use Cases
+- **Coding Tab**: Programming assistants
+- **Image/Video Tabs**: Content generation
+- **Speed Tab**: Real-time applications
+- **Enterprise Tab**: Production deployments
+
+### For Research
+- **Ecosystem Tab**: Market trends
+- **JSON Export**: Programmatic analysis
+- **Confidence Scores**: Data quality assessment
 
 ---
 
-## 🔍 Understanding the Rankings
+## 🔍 Understanding Metrics
 
-### When to use Performance Ranking:
-- You need the absolute best model regardless of cost
-- Benchmarking your application against top performers
-- Research and comparison purposes
+### When to prioritize different views:
+**Overall Ranking:**
+- General-purpose model selection
+- Balanced performance across dimensions
+- When you need versatility
 
-### When to use Price Ranking:
+**Value Ranking:**
+- Budget constraints
+- Cost optimization
+- Startup/small team scenarios
+
+**Coding Ranking:**
+- Software development assistants
+- Code generation tasks
+- Technical documentation
+
+**Speed Ranking:**
+- Real-time applications
+- High-throughput requirements
+- Latency-sensitive use cases
+
+**Enterprise Ranking:**
+- Production deployments
+- Mission-critical applications
+- SLA requirements
+
+**Open Source Ranking:**
+- Self-hosting requirements
+- Customization needs
+- Privacy-focused deployments
+
+---
+
+## 🛠️ Troubleshooting
+
+### Common Issues
+
+**Issue:** Program fails to connect
+```
+[ERROR] Connection failed
+```
+**Solution:** Check internet connection and firewall settings
+
+**Issue:** Dashboard not rendering correctly
+**Solution:** Use a modern browser (Chrome 90+, Firefox 88+, Edge 90+)
+
+**Issue:** Missing output files
+**Solution:** Check `output/` and `data/` directories exist and have write permissions
+
+**Issue:** JSON parsing error
+**Solution:** API data format may have changed - check for updates
+
+---
+
+## 📞 Support
+
+For issues, questions, or feature requests:
+- Check the main [README.md](README.md) for detailed documentation
+- Review console output for error messages
+- Ensure all dependencies are properly installed
+
+---
+
+**CrossBench** - Making AI model comparison faster, fairer, and more informed.
 - Budget is your primary concern
 - Looking for free or low-cost alternatives
 - Cost-sensitive deployments
