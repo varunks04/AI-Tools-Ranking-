@@ -1,0 +1,101 @@
+Rank,Model,Organization,GPQA Score,Input Price,Price
+1,Kimi K2-Instruct-0905,Moonshot AI,0.751,0.00,0.00
+2,MiniMax M1 40K,MiniMax,0.692,0.00,0.00
+3,Magistral Small 2506,Mistral AI,0.682,0.00,0.00
+4,Magistral Medium,Mistral AI,0.708,0.00,0.00
+5,Llama-3.3 Nemotron Super 49B v1,NVIDIA,0.667,0.00,0.00
+6,o1-pro,OpenAI,0.790,0.00,0.00
+7,Qwen2 7B Instruct,Alibaba Cloud / Qwen Team,0.253,0.00,0.00
+8,Gemini Diffusion,Google,0.404,0.00,0.00
+9,Llama 3.1 Nemotron Nano 8B V1,NVIDIA,0.541,0.00,0.00
+10,Gemma 3 1B,Google,0.192,0.00,0.00
+11,Gemma 3n E2B Instructed,Google,0.248,0.00,0.00
+12,Gemma 3n E2B Instructed LiteRT (Preview),Google,0.248,0.00,0.00
+13,Llama 3.1 Nemotron Ultra 253B v1,NVIDIA,0.760,0.00,0.00
+14,Gemma 3n E4B Instructed LiteRT Preview,Google,0.237,0.00,0.00
+15,Qwen2 72B Instruct,Alibaba Cloud / Qwen Team,0.424,0.00,0.00
+16,GLM-4.5-Air,Zhipu AI,0.750,0.00,0.00
+17,Qwen2.5 VL 32B Instruct,Alibaba Cloud / Qwen Team,0.460,0.00,0.00
+18,Qwen2.5-Omni-7B,Alibaba Cloud / Qwen Team,0.308,0.00,0.00
+19,Phi-3.5-MoE-instruct,Microsoft,0.368,0.00,0.00
+20,Qwen2.5 32B Instruct,Alibaba Cloud / Qwen Team,0.495,0.00,0.00
+21,Kimi K2 Base,Moonshot AI,0.481,0.00,0.00
+22,Phi 4 Mini,Microsoft,0.252,0.00,0.00
+23,Qwen2.5 14B Instruct,Alibaba Cloud / Qwen Team,0.455,0.00,0.00
+24,Grok-4 Heavy,xAI,0.884,0.00,0.00
+25,Mistral Large 3 (675B Instruct 2512 NVFP4),Mistral AI,0.439,0.00,0.00
+26,Grok-2 mini,xAI,0.510,0.00,0.00
+27,QwQ-32B,Alibaba Cloud / Qwen Team,0.652,0.00,0.00
+28,Mistral Small 3.2 24B Instruct,Mistral AI,0.461,0.00,0.00
+29,Grok-1.5,xAI,0.359,0.00,0.00
+30,Mistral Small 3.1 24B Instruct,Mistral AI,0.460,0.00,0.00
+31,Mistral Small 3 24B Base,Mistral AI,0.344,0.00,0.00
+32,Phi 4 Reasoning,Microsoft,0.658,0.00,0.00
+33,Phi 4 Mini Reasoning,Microsoft,0.520,0.00,0.00
+34,Phi 4 Reasoning Plus,Microsoft,0.689,0.00,0.00
+35,Mistral Large 3 (675B Instruct 2512 Eagle),Mistral AI,0.439,0.00,0.00
+36,DeepSeek R1 Distill Llama 8B,DeepSeek,0.490,0.00,0.00
+37,DeepSeek R1 Distill Qwen 14B,DeepSeek,0.591,0.00,0.00
+38,DeepSeek R1 Distill Qwen 1.5B,DeepSeek,0.338,0.00,0.00
+39,Nemotron Nano 9B v2,NVIDIA,0.640,0.00,0.00
+40,DeepSeek R1 Distill Qwen 7B,DeepSeek,0.491,0.00,0.00
+41,Qwen3 VL 32B Instruct,Alibaba Cloud / Qwen Team,0.689,0.00,0.00
+42,Qwen3 VL 32B Thinking,Alibaba Cloud / Qwen Team,0.731,0.00,0.00
+43,Mistral Large 3 (675B Base),Mistral AI,0.439,0.00,0.00
+44,DeepSeek R1 Zero,DeepSeek,0.733,0.00,0.00
+45,Gemini 2.0 Flash Thinking,Google,0.742,0.25,0.25
+46,Claude Haiku 4.5,Anthropic,0.730,1.00,1.00
+47,o3-mini,OpenAI,0.772,1.10,1.10
+48,o4-mini,OpenAI,0.814,1.10,1.10
+49,GPT-5.1 Thinking,OpenAI,0.881,1.25,1.25
+50,GPT-5.1,OpenAI,0.881,1.25,1.25
+51,GPT-5.1 Instant,OpenAI,0.881,1.25,1.25
+52,GPT-5,OpenAI,0.857,1.25,1.25
+53,Gemini 2.5 Pro,Google,0.830,1.25,1.25
+54,Gemini 2.5 Pro Preview 06-05,Google,0.864,1.25,1.25
+55,GPT-5.2,OpenAI,0.924,1.75,1.75
+56,GPT-4.1,OpenAI,0.663,2.00,2.00
+57,Jamba 1.5 Large,AI21 Labs,0.369,2.00,2.00
+58,Grok-2,xAI,0.560,2.00,2.00
+59,o3,OpenAI,0.833,2.00,2.00
+60,Gemini 3 Pro,Google,0.919,2.00,2.00
+61,GPT-4o,OpenAI,0.536,2.50,2.50
+62,Gemini 1.5 Pro,Google,0.591,2.50,2.50
+63,Grok-4,xAI,0.875,3.00,3.00
+64,Grok-3,xAI,0.846,3.00,3.00
+65,o1-mini,OpenAI,0.600,3.00,3.00
+66,Claude Sonnet 4.5,Anthropic,0.834,3.00,3.00
+67,Claude Sonnet 4,Anthropic,0.754,3.00,3.00
+68,Claude 3 Sonnet,Anthropic,0.404,3.00,3.00
+69,Claude 3.7 Sonnet,Anthropic,0.848,3.00,3.00
+70,Claude 3.5 Sonnet,Anthropic,0.594,3.00,3.00
+71,Claude Opus 4.5,Anthropic,0.870,5.00,5.00
+72,GPT-4 Turbo,OpenAI,0.480,10.00,10.00
+73,o1-preview,OpenAI,0.733,15.00,15.00
+74,o1,OpenAI,0.780,15.00,15.00
+75,Claude Opus 4,Anthropic,0.796,15.00,15.00
+76,Claude 3 Opus,Anthropic,0.504,15.00,15.00
+77,Claude Opus 4.1,Anthropic,0.809,15.00,15.00
+78,Gemma 3n E4B Instructed,Google,0.237,20.00,20.00
+79,GPT-5.2 Pro,OpenAI,0.932,21.00,21.00
+80,GPT-4,OpenAI,0.357,30.00,30.00
+81,GPT-4.5,OpenAI,0.695,75.00,75.00
+82,Llama 3.2 3B Instruct,Meta,0.328,10000.00,10000.00
+83,Gemma 3 4B,Google,0.308,20000.00,20000.00
+84,Nova Micro,Amazon,0.400,30000.00,30000.00
+85,Llama 3.1 8B Instruct,Meta,0.304,30000.00,30000.00
+86,Gemma 3 12B,Google,0.409,50000.00,50000.00
+87,GPT-5 nano,OpenAI,0.712,50000.00,50000.00
+88,Llama 3.2 11B Instruct,Meta,0.328,50000.00,50000.00
+89,GPT OSS 20B,OpenAI,0.715,50000.00,50000.00
+90,Nemotron 3 Nano (30B A3B),NVIDIA,0.750,60000.00,60000.00
+91,Nova Lite,Amazon,0.420,60000.00,60000.00
+92,Phi 4,Microsoft,0.561,70000.00,70000.00
+93,Gemini 1.5 Flash 8B,Google,0.384,70000.00,70000.00
+94,Mistral Small 3 24B Instruct,Mistral AI,0.453,70000.00,70000.00
+95,Gemini 2.0 Flash-Lite,Google,0.515,70000.00,70000.00
+96,Llama 4 Scout,Meta,0.572,80000.00,80000.00
+97,GPT OSS 120B,OpenAI,0.801,90000.00,90000.00
+98,Min  istral 3 (3B Reasoning 2512),Mistral AI,0.534,100000.00,100000.00
+99,Mistral Small 3.1 24B Base,Mistral AI,0.375,100000.00,100000.00
+100,GPT-4.1 nano,OpenAI,0.503,100000.00,100000.00

@@ -1,0 +1,101 @@
+Rank,Model,Organization,GPQA Score,Input Price,Overall Score
+1,GPT-5.2,OpenAI,0.924,1.750000,90.05
+2,Gemini 3 Pro,Google,0.919,2.000000,89.59
+3,Grok-4 Heavy,xAI,0.884,0.000000,87.72
+4,GPT-5.1 Thinking,OpenAI,0.881,1.250000,87.52
+5,GPT-5.1 Instant,OpenAI,0.881,1.250000,87.52
+6,GPT-5.1,OpenAI,0.881,1.250000,87.52
+7,Gemini 2.5 Pro Preview 06-05,Google,0.864,1.250000,86.27
+8,GPT-5,OpenAI,0.857,1.250000,85.75
+9,GPT-5.2 Pro,OpenAI,0.932,21.000000,85.22
+10,Grok-4,xAI,0.875,3.000000,85.13
+11,Claude 3.7 Sonnet,Anthropic,0.848,3.000000,83.15
+12,Gemini 2.5 Pro,Google,0.830,1.250000,83.02
+13,Grok-3,xAI,0.846,3.000000,82.25
+14,Claude Opus 4.5,Anthropic,0.870,5.000000,81.03
+15,Gemini 3 Flash,Google,0.904,500000.000000,80.32
+16,Claude Sonnet 4.5,Anthropic,0.834,3.000000,78.74
+17,o3,OpenAI,0.833,2.000000,77.44
+18,o4-mini,OpenAI,0.814,1.100000,76.80
+19,Gemini 2.0 Flash Thinking,Google,0.742,0.250000,76.67
+20,o1-pro,OpenAI,0.790,0.000000,76.13
+21,Qwen3 VL 32B Thinking,Alibaba Cloud / Qwen Team,0.731,0.000000,75.35
+22,Grok-3 Mini,xAI,0.840,300000.000000,74.12
+23,Gemini 2.5 Flash,Google,0.828,300000.000000,73.98
+24,o3-mini,OpenAI,0.772,1.100000,73.90
+25,GPT-5 mini,OpenAI,0.823,250000.000000,73.62
+26,Llama 3.1 Nemotron Ultra 253B v1,NVIDIA,0.760,0.000000,73.32
+27,Claude Opus 4.1,Anthropic,0.809,15.000000,73.27
+28,Claude Sonnet 4,Anthropic,0.754,3.000000,73.04
+29,Kimi K2-Instruct-0905,Moonshot AI,0.751,0.000000,72.69
+30,Claude Opus 4,Anthropic,0.796,15.000000,72.34
+31,Qwen3 VL 32B Instruct,Alibaba Cloud / Qwen Team,0.689,0.000000,72.27
+32,Claude Haiku 4.5,Anthropic,0.730,1.000000,71.98
+33,GLM-4.5-Air,Zhipu AI,0.750,0.000000,71.88
+34,Grok 4 Fast,xAI,0.857,200000.000000,70.76
+35,DeepSeek R1 Zero,DeepSeek,0.733,0.000000,70.70
+36,o1,OpenAI,0.780,15.000000,69.45
+37,GPT-4.1,OpenAI,0.663,2.000000,69.44
+38,Kimi K2-Thinking-0905,Moonshot AI,0.845,470000.000000,69.18
+39,Magistral Medium,Mistral AI,0.708,0.000000,68.98
+40,MiMo-V2-Flash,Xiaomi,0.837,100000.000000,68.63
+41,Phi 4 Reasoning Plus,Microsoft,0.689,0.000000,68.42
+42,MiniMax M1 40K,MiniMax,0.692,0.000000,67.87
+43,Magistral Small 2506,Mistral AI,0.682,0.000000,67.17
+44,GPT OSS 120B,OpenAI,0.801,90000.000000,66.90
+45,Qwen3-235B-A22B-Thinking-2507,Alibaba Cloud / Qwen Team,0.811,300000.000000,66.83
+46,GLM-4.6,Zhipu AI,0.810,550000.000000,66.77
+47,DeepSeek-R1-0528,DeepSeek,0.810,500000.000000,66.77
+48,Qwen3 VL 30B A3B Thinking,Alibaba Cloud / Qwen Team,0.744,200000.000000,66.31
+49,Phi 4 Reasoning,Microsoft,0.658,0.000000,66.28
+50,Llama-3.3 Nemotron Super 49B v1,NVIDIA,0.667,0.000000,66.13
+51,DeepSeek-V3.2-Exp,DeepSeek,0.799,270000.000000,66.01
+52,o1-preview,OpenAI,0.733,15.000000,65.45
+53,GLM-4.5,Zhipu AI,0.791,400000.000000,65.45
+54,QwQ-32B,Alibaba Cloud / Qwen Team,0.652,0.000000,65.11
+55,GPT-5 nano,OpenAI,0.712,50000.000000,64.71
+56,MiniMax M2,MiniMax,0.780,300000.000000,64.70
+57,GPT-4.5,OpenAI,0.695,75.000000,64.63
+58,Qwen3-235B-A22B-Instruct-2507,Alibaba Cloud / Qwen Team,0.775,150000.000000,64.35
+59,Qwen3-Next-80B-A3B-Thinking,Alibaba Cloud / Qwen Team,0.772,150000.000000,64.14
+60,Nemotron Nano 9B v2,NVIDIA,0.640,0.000000,63.53
+61,Qwen3 VL 30B A3B Instruct,Alibaba Cloud / Qwen Team,0.704,200000.000000,63.37
+62,Kimi K2 0905,Moonshot AI,0.758,600000.000000,63.18
+63,Gemini 1.5 Pro,Google,0.591,2.500000,63.06
+64,Qwen3 VL 8B Thinking,Alibaba Cloud / Qwen Team,0.699,180000.000000,63.00
+65,Claude 3.5 Sonnet,Anthropic,0.594,3.000000,62.98
+66,Kimi K2 Instruct,Moonshot AI,0.751,500000.000000,62.69
+67,Nemotron 3 Nano (30B A3B),NVIDIA,0.750,60000.000000,61.88
+68,DeepSeek-V3.1,DeepSeek,0.749,270000.000000,61.81
+69,Qwen3-Next-80B-A3B-Instruct,Alibaba Cloud / Qwen Team,0.729,150000.000000,60.43
+70,Grok-2,xAI,0.560,2.000000,60.37
+71,GPT OSS 20B,OpenAI,0.715,50000.000000,60.21
+72,DeepSeek R1 Distill Qwen 14B,DeepSeek,0.591,0.000000,60.15
+73,GPT-4.1 mini,OpenAI,0.650,400000.000000,59.40
+74,Ministral 3 (14B Reasoning 2512),Mistral AI,0.712,200000.000000,59.25
+75,o1-mini,OpenAI,0.600,3.000000,59.22
+76,Gemini 2.5 Flash-Lite,Google,0.646,100000.000000,59.11
+77,GPT-4o,OpenAI,0.536,2.500000,59.02
+78,MiniMax M1 80K,MiniMax,0.700,550000.000000,58.43
+79,Grok-2 mini,xAI,0.510,0.000000,58.36
+80,Llama 4 Maverick,Meta,0.698,170000.000000,58.29
+81,Qwen3 VL 4B Thinking,Alibaba Cloud / Qwen Team,0.641,100000.000000,57.99
+82,DeepSeek-V3 0324,DeepSeek,0.684,280000.000000,57.32
+83,Gemini 2.0 Flash,Google,0.621,100000.000000,57.27
+84,Llama 3.1 Nemotron Nano 8B V1,NVIDIA,0.541,0.000000,56.70
+85,Ministral 3 (8B Reasoning 2512),Mistral AI,0.668,150000.000000,56.22
+86,Phi 4 Mini Reasoning,Microsoft,0.520,0.000000,56.01
+87,Qwen3 30B A3B,Alibaba Cloud / Qwen Team,0.658,100000.000000,55.53
+88,QwQ-32B-Preview,Alibaba Cloud / Qwen Team,0.652,150000.000000,55.11
+89,DeepSeek R1 Distill Llama 70B,DeepSeek,0.652,100000.000000,55.11
+90,Qwen2.5 VL 32B Instruct,Alibaba Cloud / Qwen Team,0.460,0.000000,54.69
+91,Qwen2.5 32B Instruct,Alibaba Cloud / Qwen Team,0.495,0.000000,53.53
+92,DeepSeek R1 Distill Qwen 7B,DeepSeek,0.491,0.000000,53.25
+93,DeepSeek R1 Distill Llama 8B,DeepSeek,0.490,0.000000,53.19
+94,Claude 3 Opus,Anthropic,0.504,15.000000,52.67
+95,Kimi K2 Base,Moonshot AI,0.481,0.000000,52.56
+96,DeepSeek R1 Distill Qwen 32B,DeepSeek,0.621,120000.000000,52.22
+97,GPT-4 Turbo,OpenAI,0.480,10.000000,51.91
+98,Gemini Diffusion,Google,0.404,0.000000,51.32
+99,Mistral Small 3.2 24B Instruct,Mistral AI,0.461,0.000000,51.20
+100,Mistral Small 3.1 24B Instruct,Mistral AI,0.460,0.000000,51.09
